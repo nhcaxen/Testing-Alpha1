@@ -13,7 +13,12 @@ from pytgcalls.exceptions import (
 )
 from pytgcalls.types import Update
 from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
-from pytgcalls.types import AudioParameters, AudioQuality, VideoParameters, VideoQuality
+from pytgcalls.types import (
+    AudioParameters, 
+    AudioQuality, 
+    VideoParameters, 
+    VideoQuality,
+)
 from pytgcalls.types.stream import StreamAudioEnded
 
 import config
@@ -246,7 +251,10 @@ class Call(PyTgCalls):
                 video_parameters=VideoParameters.from_quality(VideoQuality.SD_480p),
             )
         else:
-            stream = AudioPiped(link, audio_parameters=AudioParameters.from_quality(AudioQuality.HIGH))
+            stream = AudioPiped(
+                link, 
+                audio_parameters=AudioParameters.from_quality(AudioQuality.HIGH),
+            )
         await assistant.change_stream(
             chat_id,
             stream,
@@ -304,7 +312,10 @@ class Call(PyTgCalls):
                     video_parameters=VideoParameters.from_quality(VideoQuality.SD_480p),
                 )
                 if video
-                else AudioPiped(link, audio_parameters=AudioParameters.from_quality(AudioQuality.HIGH))
+                else AudioPiped(
+                    link, 
+                    audio_parameters=AudioParameters.from_quality(AudioQuality.HIGH),
+                )
             )
         try:
             await assistant.join_group_call(
@@ -459,7 +470,10 @@ class Call(PyTgCalls):
                         video_parameters=VideoParameters.from_quality(VideoQuality.SD_480p),
                     )
                     if str(streamtype) == "video"
-                    else AudioPiped(videoid, audio_parameters=AudioParameters.from_quality(AudioQuality.HIGH))
+                    else AudioPiped(
+                        videoid, 
+                        audio_parameters=AudioParameters.from_quality(AudioQuality.HIGH),
+                    )
                 )
                 try:
                     await client.change_stream(chat_id, stream)
